@@ -30,6 +30,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  # DatabaseCleaner Configuration
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -40,7 +41,9 @@ RSpec.configure do |config|
       example.run
     end
   end
+  ####
 
+  #FactoryGirl Configuration to shortcut the methods.
   config.include FactoryGirl::Syntax::Methods
   
 
@@ -73,6 +76,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
+#Shoulda MAtchers Configuration
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
