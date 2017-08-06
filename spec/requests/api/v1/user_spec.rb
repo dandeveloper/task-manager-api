@@ -13,8 +13,8 @@ RSpec.describe 'Users AIP', type: :request do
 
     context 'When user exists' do
       it 'Returns the user' do
-        user_response = JSON.parse(response.body)
-        expect(user_response['id']).to eq(user_id)
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:id]).to eq(user_id)
       end
 
       it 'Returns the status code 200' do
@@ -44,8 +44,8 @@ RSpec.describe 'Users AIP', type: :request do
       end
 
       it 'Returns the JSON data for created user' do
-        user_response = JSON.parse(response.body)
-        expect(user_response['email']).to eq(user_params[:email])
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:email]).to eq(user_params[:email])
       end
     end
 
@@ -56,8 +56,8 @@ RSpec.describe 'Users AIP', type: :request do
       end
 
       it 'Returns the JSON data for the errors' do
-        user_response = JSON.parse(response.body)
-        expect(user_response).to have_key('errors')
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response).to have_key(:errors)
       end
     end
 
