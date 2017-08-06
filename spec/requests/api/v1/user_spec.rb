@@ -11,21 +11,53 @@ RSpec.describe 'Users AIP', type: :request do
       get "/users/#{user_id}", params: {}, headers: headers
     end
 
-    context 'when user exists' do
-      it 'returns the user' do
+    context 'When user exists' do
+      it 'Returns the user' do
         user_response = JSON.parse(response.body)
         expect(user_response['id']).to eq(user_id)
       end
 
-      it 'Returns status code 200' do
+      it 'Returns the status code 200' do
         expect(response).to have_http_status(200)
       end
     end
 
-    context 'when user does not exist' do
+    context 'When user does not exist' do
       let(:user_id) { 10000 }
-      it 'returns status code 404' do
+      it 'Returns the status code 404' do
         expect(response).to have_http_status(404)
+      end
+    end
+  end
+
+  describe 'POST /users' do
+    before do
+      headers = { 'Accept' => 'application/vnd.taskmanagerapi.v1' }
+      post '/users', params: { user: user_params }, headers: headers
+    end
+
+    context 'When the request params are valid' do
+      let(:user_params) { attributes_for(:user) }
+
+      it 'Returns the status code 201' do
+        expect(response).to have_http_status(201)        
+      end
+
+      it 'Returns the JSON data for created user' do
+        user_response = JSON.parse(response.body)
+        expect(user_response['email']).to eq(user_params[:email])
+      end
+    end
+
+    context 'When the request params are invalid' do
+      let(:user_params) { attributes_for(:user, email: 'invalid_email@') }
+      it 'Returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'Returns the JSON data for the errors' do
+        user_response = JSON.parse(response.body)
+        expect(user_response).to have_key('errors')
       end
     end
 
