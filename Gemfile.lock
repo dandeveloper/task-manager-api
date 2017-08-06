@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: e58e6890ce36c766ef26814613700e1fc8337dfd
-  branch: rails-5
-  specs:
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -140,6 +132,8 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -178,7 +172,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.4)
   rspec-rails (~> 3.5)
-  shoulda-matchers!
+  shoulda-matchers
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
