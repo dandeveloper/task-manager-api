@@ -6,7 +6,8 @@ RSpec.describe 'Users AIP', type: :request do
   let(:headers) do
     { 
       'Accept' => 'application/vnd.taskmanagerapi.v1',
-      'Content-Type' => Mime[:json].to_s
+      'Content-Type' => Mime[:json].to_s,
+      'Authorization' => user.auth_token
     }
   end
   
