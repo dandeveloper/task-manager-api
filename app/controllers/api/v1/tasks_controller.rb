@@ -9,4 +9,9 @@ class Api::V1::TasksController < ApplicationController
       head 404
     end
   end
+
+  def show
+    task = current_user.tasks.find(params[:id])
+    render json: task, status: 200
+  end
 end
