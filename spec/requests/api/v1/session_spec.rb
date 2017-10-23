@@ -6,7 +6,7 @@ RSpec.describe 'Session API', type: :request do
 
   let(:headers) do
     {
-      'Accept' => 'application/vnd.taskmanagerapi.v1',
+      'Accept' => 'application/vnd.taskmanager.v1',
       'Content-Type' => Mime[:json].to_s
     }
   end

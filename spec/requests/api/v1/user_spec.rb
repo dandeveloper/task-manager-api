@@ -4,13 +4,13 @@ RSpec.describe 'Users AIP', type: :request do
   let!(:user) { create(:user) }
   let(:user_id) { user.id }
   let(:headers) do
-    { 
-      'Accept' => 'application/vnd.taskmanagerapi.v1',
+    {
+      'Accept' => 'application/vnd.taskmanager.v1',
       'Content-Type' => Mime[:json].to_s,
       'Authorization' => user.auth_token
     }
   end
-  
+
   before { host! 'api.taskmanagerapi.dev' }
 
   describe "GET /users/:id" do
@@ -45,7 +45,7 @@ RSpec.describe 'Users AIP', type: :request do
       let(:user_params) { attributes_for(:user) }
 
       it 'Returns the status code 201' do
-        expect(response).to have_http_status(201)        
+        expect(response).to have_http_status(201)
       end
 
       it 'Returns the JSON data for created user' do
@@ -70,7 +70,7 @@ RSpec.describe 'Users AIP', type: :request do
     before do
       put "/users/#{user_id}", params: { user: user_params }.to_json, headers: headers
     end
-    
+
     context 'when the request params are valid' do
       let(:user_params) { { email: "danilotremere@taskamanager.com" } }
 
@@ -86,7 +86,7 @@ RSpec.describe 'Users AIP', type: :request do
 
     context 'When the request params are invalid' do
       let(:user_params) { { email: "danilotremere@" } }
-      
+
       it 'Returns status code 422' do
         expect(response).to have_http_status(422)
       end
