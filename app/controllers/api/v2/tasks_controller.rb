@@ -3,7 +3,7 @@ class Api::V2::TasksController < ApplicationController
 
   def index
     begin
-      tasks = current_user.tasks
+      tasks = current_user.tasks.ransack(params[:q]).result
       render json: tasks, status: 200
     rescue
       head 404
