@@ -20,7 +20,7 @@ RSpec.describe 'Users AIP', type: :request do
 
     context 'When user exists' do
       it 'Returns the user' do
-        expect(json_body[:id]).to eq(user_id)
+        expect(json_body[:data][:id].to_i).to eq(user_id)
       end
 
       it 'Returns the status code 200' do
@@ -49,7 +49,7 @@ RSpec.describe 'Users AIP', type: :request do
       end
 
       it 'Returns the JSON data for created user' do
-        expect(json_body[:email]).to eq(user_params[:email])
+        expect(json_body[:data][:attributes][:email]).to eq(user_params[:email])
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe 'Users AIP', type: :request do
 
       it 'returns the json data for the updated user' do
         json_body = JSON.parse(response.body, symbolize_names: true)
-        expect(json_body[:email]).to eq(user_params[:email])
+        expect(json_body[:data][:attributes][:email]).to eq(user_params[:email])
       end
     end
 
